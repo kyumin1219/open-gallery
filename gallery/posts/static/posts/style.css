@@ -1,0 +1,57 @@
+*{margin: 0; padding: 0; box-sizing: border-box; line-height: 1.5em;}
+body{width: 100%;}
+section{position: relative;}
+.container{width: 1320px; position: relative; margin: 0 auto;}
+ul, li{list-style: none;}
+a, label, button{cursor: pointer; color: black; display: inline-block; text-decoration: none; border: none;}
+img{max-width: 100%;}
+
+/* 기본 정렬 방식 */
+.f, .fc, .fb, .fla{display: flex;}
+.fc{justify-content: center;}
+.fb{justify-content: space-between;}
+.fla{justify-content: space-around;}
+.r{display: flex; flex-flow: column;}
+.rc{display: flex; flex-flow: column; justify-content: center;}
+.rb{display: flex; flex-flow: column; justify-content: space-between;}
+.re{display: flex; flex-flow: column; justify-content: flex-end;}
+.cc{display: flex; flex-flow: column; justify-content: center; align-items: center;}
+.hc{align-items: center;}
+.tc{text-align: center;}
+
+/* 마진 정렬 방식 */
+.mts{margin-top: .25vw;}
+.mt1{margin-top: .5vw;}
+.mt2{margin-top: 1vw;}
+.mt3{margin-top: 1.5vw;}
+.mt4{margin-top: 2vw;}
+.mt5{margin-top: 2.5vw;}
+.mt6{margin-top: 3vw;}
+.mt7{margin-top: 3.5vw;}
+.mt8{margin-top: 4vw;}
+.mt9{margin-top: 4.5vw;}
+.mt10{margin-top: 5vw;}
+.mt20{padding-top: 7vw; padding-bottom: 7vw;}
+.mtm20{margin-top: 10vw;}
+
+/* 헤더 */
+header{width: 100%; position: fixed; background-color: transparent; z-index: 99999; padding-top: 30px;}
+header nav{width: 85%; border-bottom: 1px solid black;}
+header nav ul a{padding: 0.5vw 1vw; font-size: 18px;}
+header nav ul>li{position: relative; display: flex; align-items: center; justify-content: center;}
+
+/* 로그인 페이지 */
+.login{width: 50%; height: 65vh; padding: 40px; border-radius: 15px; box-shadow: 0 0 30px rgb(151, 151, 151);}
+.login form div{font-size: 18px;}
+.login input{width: 100%; height: 45px; border-radius: 15px; border: 1px solid black; padding-left: 20px; font-size: 18px;}
+.login form button{position: relative; width: 100px; height: 45px; padding: 0 20px; top: 40%; font-size: 18px; border-radius: 45px; background-color: black; color: white;}
+.login form div:nth-child(4){position: absolute; bottom: 5%; left: 50%; transform: translate(-50%, -50%);}
+.login .signup_href{position: absolute; bottom: 5%; right: 5%; color: #b0b0b0;}
+.login .signup_href a{margin-left: 7px; color: #8b8b8b; border-bottom: 2px solid #8b8b8b;}
+
+/* 회원가입 페이지 */
+.signup{width: 50%; height: 65vh; padding: 40px; border-radius: 15px; box-shadow: 0 0 30px rgb(151, 151, 151);}
+.signup form div{font-size: 18px;}
+.signup input{width: 100%; height: 45px; border-radius: 15px; border: 1px solid black; padding-left: 20px; font-size: 18px;}
+.signup form button{position: relative; width: 150px; height: 45px; padding: 0 20px; top: 40%; font-size: 18px; border-radius: 45px; background-color: black; color: white;}
+.signup form div:nth-child(6){position: absolute; bottom: 5%; left: 50%; transform: translate(-50%, -50%);}

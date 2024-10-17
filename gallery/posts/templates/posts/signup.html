@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'posts/style.css' %}">
+    <title>Sign Up</title>
+</head>
+<body>
+    {% include 'posts/header.html' %}
+    <!-- 회원가입 콘텐츠 -->
+    {% block content %}
+    <main>
+        <section class="cc mt20">
+            <div class="container signup mt4">
+                <h2 class="cc">Sign Up Page</h2>
+                <form action="{% url 'signup' %}" method="post" class="mt6">
+                    {% csrf_token %}
+                    <div class="mt2">
+                        <p>이름 : </p>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="mt2">
+                        <p>아이디 : </p>
+                        {{ form.username }}
+                    </div>
+                    <div class="mt2">
+                        <p>비밀번호 : </p>
+                        {{ form.password }}
+                    </div>
+                    <div class="mt2">
+                        <p>이메일 : </p>
+                        {{ form.email }}
+                    </div>
+                    <div>
+                        <button type="submit">회원가입</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- 회원가입 콘텐츠 -->
+    {% endblock %}
+</body>
+</html>

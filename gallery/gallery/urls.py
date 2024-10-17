@@ -1,5 +1,5 @@
 """
-URL configuration for open_gallery project.
+URL configuration for gallery project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -15,8 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+import posts.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', posts.views.home, name="home"),
+    path('signup/', posts.views.signup, name='signup'),
+    path('login/', posts.views.login_view, name='login'),
+    path('logout/', posts.views.logout_view, name='logout'),
+    path('api/', include('posts.urls')),
 ]
