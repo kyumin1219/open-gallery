@@ -13,6 +13,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm, ArtistRegistrationForm
 import logging
 import re
+from django.db.models import Q
 from .models import Artist, Artwork
 
 class ApiOverview(APIView):
@@ -23,9 +24,19 @@ class ApiOverview(APIView):
 def api_overview(request):
     return JsonResponse({"message": "API Overview"})
 
-# 메인 페이지
+# 메인 페이지 / 작품 조회
 def home(request):
-    return render(request, "posts/index.html")
+    artworks = Artwork.objects.all().order_by('-id')
+    return render(request, 'posts/index.html', {'artworks': artworks})
+
+def artwork_list(request):
+    query = request.GET.get('q', '')
+    if query:
+        artworks = Artwork.objects.filter(title__icontains=query)
+    else:
+        artworks = Artwork.objects.all()
+
+    return render(request, 'posts/index.html', {'artworks': artworks}) 
 
 # 로그인
 def login_view(request):
@@ -65,13 +76,19 @@ def signup(request):
 
 # 작가
 def artist_list(request):
+    query = request.GET.get('q', '')  # 검색어를 GET 요청에서 가져옴
     artists = Artist.objects.all().order_by('-id')
-    return render(request, 'posts/artist_list.html', {'artists': artists})
 
-# 작품
-def artwork_list(request):
-    artworks = Artwork.objects.all().order_by('-id')
-    return render(request, 'posts/artwork_list.html', {'artworks': artworks})
+    # 검색어가 있는 경우 필터링
+    if query:
+        artists = artists.filter(
+            Q(name__icontains=query) | 
+            Q(gender__icontains=query) |
+            Q(email__icontains=query) |
+            Q(contact__icontains=query)
+        )
+    
+    return render(request, 'posts/artist_list.html', {'artists': artists})
 
 # 작가 신청
 @login_required(login_url='login')  # 로그인 페이지 URL을 지정

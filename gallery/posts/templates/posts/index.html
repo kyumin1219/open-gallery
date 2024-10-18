@@ -1,36 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
-    <title>Document</title>
+    <title>작품 목록</title>
 </head>
 <body>
     <!-- 헤더 -->
     {% include 'posts/header.html' %}
+    
     <!-- 메인 -->
     <main>
-        <section class="cc mt20">
-            <div class="container">
-                <h1>작품 목록</h1>
-                <table>
-                    <tr>
-                        <th>제목</th>
-                        <th>가격</th>
-                        <th>호수</th>
-                        <th>작가</th>
-                    </tr>
-                    {% for artwork in artworks %}
-                    <tr>
-                        <td>{{ artwork.title }}</td>
-                        <td>{{ artwork.price|floatformat:0 }}</td>
-                        <td>{{ artwork.size }}</td>
-                        <td>{{ artwork.artist.name }}</td>
-                    </tr>
-                    {% endfor %}
+        <section class="mt20">
+            <div class="container cc">
+                <h1 class="tc">작품 목록</h1>
+                
+                <!-- 검색 폼 -->
+                <form method="GET" action="{% url 'artwork_list' %}" class="search-form">
+                    <input type="text" name="q" placeholder="제목, 가격, 호수로 검색" value="{{ request.GET.q }}">
+                    <button type="submit">검색</button>
+                </form>
+
+                <!-- 작품 목록 테이블 -->
+                {% if artworks %}
+                <table class="artwork_list mt6">
+                    <thead>
+                        <tr>
+                            <th>제목</th>
+                            <th>가격</th>
+                            <th>호수</th>
+                            <th>작가</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for artwork in artworks %}
+                        <tr>
+                            <td>{{ artwork.title }}</td>
+                            <td>{{ artwork.price|floatformat:0 }} 원</td>
+                            <td>{{ artwork.hoosu }}</td>
+                            <td>{{ artwork.artist.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
+                {% endif %}
+                {% if not artworks %}
+                <p class="mt10">작품이 존재하지 않습니다.</p>
+                {% endif %}
             </div>
         </section>
     </main>
