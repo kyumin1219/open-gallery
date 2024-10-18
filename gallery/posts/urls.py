@@ -1,9 +1,18 @@
 # posts/urls.py
-
 from django.urls import path
-from .views import YourAPIView  # 여기에 실제 API 뷰를 임포트
+from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', YourAPIView.as_view(), name='your_api_view'),
-    # 추가적인 API 경로가 필요하면 여기에 추가
+    path('api/', views.api_overview, name='api-overview'),
+    path('signup/', views.signup, name='signup'),
+    path('logout/', views.logout_view, name='logout_view'),
+    path('login/', views.login_view, name='login_view'),
+    path('artists/', views.artist_list, name='artist_list'),
+    path('artworks/', views.artwork_list, name='artwork_list'),
+    path('register_artist/', views.register_artist, name='register_artist'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

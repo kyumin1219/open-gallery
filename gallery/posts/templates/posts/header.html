@@ -1,17 +1,22 @@
-
 <header>
     <!-- 헤더 -->
-    <div class="container mt2 fb">
+    <div class="container mt2 cc">
         <nav class="fb">
             <ul class="mainTab f21 fb">
-                <li><a href="{% url 'home'%}">홈</a></li>
-                <li><a href="#">예약하기</a></li>
-                <li><a href="#">마이페이지</a></li>
+                <li><a href="{% url 'home' %}">홈</a></li>
+                <li><a href="{% url 'artist_list' %}">작가</a></li>
+                <li><a href="{% url 'register_artist' %}">작가 등록 신청</a></li>
             </ul>
             <ul class="userTab fb f18">
-                <li><a href="{% url 'login'%}">로그인</a></li>
-                <li><span>|</span></li>
-                <li><a href="{% url 'signup'%}">회원가입</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="#">{{ user.first_name }}님</a></li>
+                    <li><span>|</span></li>
+                    <li><a href="{% url 'logout' %}">로그아웃</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">로그인</a></li>
+                    <li><span>|</span></li>
+                    <li><a href="{% url 'signup' %}">회원가입</a></li>
+                {% endif %}
             </ul>
         </nav>
     </div>

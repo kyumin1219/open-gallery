@@ -14,20 +14,22 @@
     <main>
         <section class="cc mt20">
             <div class="container">
-                <h1>작품 목록</h1>
+                <h1>작가 목록</h1>
                 <table>
                     <tr>
-                        <th>제목</th>
-                        <th>가격</th>
-                        <th>호수</th>
-                        <th>작가</th>
+                        <th>이름</th>
+                        <th>성별</th>
+                        <th>생년월일</th>
+                        <th>이메일</th>
+                        <th>연락처</th>
                     </tr>
-                    {% for artwork in artworks %}
+                    {% for artist in artists %}
                     <tr>
-                        <td>{{ artwork.title }}</td>
-                        <td>{{ artwork.price|floatformat:0 }}</td>
-                        <td>{{ artwork.size }}</td>
-                        <td>{{ artwork.artist.name }}</td>
+                        <td>{{ artist.name }}</td>
+                        <td>{{ artist.get_gender_display }}</td>
+                        <td>{{ artist.birth_date }}</td>
+                        <td>{{ artist.email }}</td>
+                        <td>{{ artist.contact }}</td>
                     </tr>
                     {% endfor %}
                 </table>

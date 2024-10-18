@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 import posts.views
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', posts.views.home, name="home"),
-    path('signup/', posts.views.signup, name='signup'),
-    path('login/', posts.views.login_view, name='login'),
-    path('logout/', posts.views.logout_view, name='logout'),
-    path('api/', include('posts.urls')),
+    path('admin/', admin.site.urls),  # Django 관리자 URL
+    path('', posts.views.home, name='home'),  # 메인 페이지
+    path('signup/', posts.views.signup, name='signup'),  # 회원가입 페이지
+    path('api/signup/', posts.views.signup, name='signup'),  # API 회원가입 엔드포인트
+    path('login/', posts.views.login_view, name='login'),  # 로그인 페이지
+    path('logout/', posts.views.logout_view, name='logout'),  # 로그아웃 페이지
+    path('register_artist/', posts.views.register_artist, name='register_artist'),  # 작가 신청 페이지
+    path('', include('posts.urls')),
 ]

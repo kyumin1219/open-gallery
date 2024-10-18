@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
+    <title>작가 등록 신청</title>
+</head>
+<body>
+    {% include 'posts/header.html' %}
+    <main>
+        <section class="cc mt20">
+            <div class="container cc">
+                <h1 class="tc">작가 등록 신청</h1>
+                <form method="POST" id="register-form" class="mt6 register_artist" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }} 
+                    <div class="mt2">
+                        <label for="name">프로필 사진:</label>
+                        <input type="file" id="profile_image" name="profile_image">
+                    </div>
+                    <div class="mt2">
+                        <label for="name">이름:</label>
+                        <input type="text" id="name" name="name" maxlength="16" required>
+                    </div>
+                    <div class="mt2">
+                        <label for="gender">성별:</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">선택하세요</option>
+                            <option value="M">남자</option>
+                            <option value="F">여자</option>
+                        </select>
+                    </div>
+                    <div class="mt2">
+                        <label for="birth_date">생년월일:</label>
+                        <input type="date" id="birth_date" name="birth_date" required>
+                    </div>
+                    <div class="mt2">
+                        <label for="email">이메일:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="mt2">
+                        <label for="contact">연락처:</label>
+                        <input type="text" id="contact" name="contact" pattern="\d{3}-\d{4}-\d{4}" placeholder="000-0000-0000" required>
+                    </div>
+                    <div class="mt2 cc">
+                        <button type="submit">신청하기</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script>
+        // document.getElementById('register-form').addEventListener('submit', function(event) {
+        //     let isValid = true;
+        //     const contactInput = document.getElementById('contact');
+        //     const contactPattern = /^\d{3}-\d{4}-\d{4}$/;
+            
+        //     if (!contactPattern.test(contactInput.value)) {
+        //         isValid = false;
+        //         alert('연락처 형식이 올바르지 않습니다. 형식: 000-0000-0000');
+        //     }
+
+        //     if (!isValid) {
+        //         event.preventDefault(); // 폼 제출 방지
+        //     }
+        // });
+    </script>
+</body>
+</html>
