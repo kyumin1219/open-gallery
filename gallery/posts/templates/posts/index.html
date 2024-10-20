@@ -15,14 +15,12 @@
     <main>
         <section class="mt20">
             <div class="container cc">
-                <h1 class="tc">작품 목록</h1>
-                
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artwork_list' %}" class="search-form mt4">
+                <form method="GET" action="{% url 'artwork_list' %}" class="search-form mt2">
                     <input type="text" name="q" placeholder="제목, 가격, 호수로 검색" value="{{ request.GET.q }}">
                     <button type="submit">검색</button>
                 </form>
-
+                <h1 class="tc mt4">작품 목록</h1>
                 <!-- 작품 목록 테이블 -->
                 {% if artworks %}
                 <ul class="artwork_list mt6">

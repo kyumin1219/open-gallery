@@ -14,12 +14,12 @@
     <main>
         <section class="mt20">
             <div class="container cc">
-                <h1 class="tc">작가 목록</h1>
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artist_list' %}" class="search-form mt4">
+                <form method="GET" action="{% url 'artist_list' %}" class="search-form mt2">
                     <input type="text" name="q" placeholder="작가님의 정보로 검색" value="{{ request.GET.q }}">
                     <button type="submit">검색</button>
                 </form>
+                <h1 class="tc mt4">작가 목록</h1>
                 <ul class="mt6 artist_list">
                     {% for artist in artists %}
                     <li>

@@ -148,37 +148,64 @@ def register_artist(request):
 # 어드민 페이지
 def artist_registration_list(request):
     query = request.GET.get('q', '')
+    search_gender = request.GET.get('gender', '')
+    search_birth_date = request.GET.get('birth_date', '')
+
+    artists = Artist.objects.all()
+
+    # 이름, 이메일, 연락처, 성별, 생년월일로 검색
     if query:
-        # 이름, 이메일, 연락처로 검색
-        artists = Artist.objects.filter(
+        artists = artists.filter(
             Q(name__icontains=query) | 
             Q(email__icontains=query) |
             Q(contact__icontains=query)
-        ).order_by('-id')
-    else:
-        artists = Artist.objects.all().order_by('-id')
+        )
+    if search_gender:
+        artists = artists.filter(gender=search_gender)
+    if search_birth_date:
+        artists = artists.filter(birth_date=search_birth_date)
 
-    # 일괄 승인/반려 처리
+    artists = artists.order_by('-id')
+
     if request.method == 'POST':
         selected_artists = request.POST.getlist('selected_artists')
         action = request.POST.get('action')
         if action == 'approve':
+            messages.success(request, '승인되었습니다.')
             Artist.objects.filter(id__in=selected_artists, status='P').update(status='A')
         elif action == 'reject':
+            messages.success(request, '거부되었습니다.')
             Artist.objects.filter(id__in=selected_artists, status='P').update(status='R')
         return redirect('artist_registration_list')
 
     return render(request, 'posts/artist_registration_list.html', {'artists': artists})
 
+# csv 다운로드
 def download_csv(request):
-    # CSV 다운로드 처리
+    query = request.GET.get('q', '')
+    search_gender = request.GET.get('gender', '')
+    search_birth_date = request.GET.get('birth_date', '')
+
+    artists = Artist.objects.all()
+
+    if query:
+        artists = artists.filter(
+            Q(name__icontains=query) | 
+            Q(email__icontains=query) |
+            Q(contact__icontains=query)
+        )
+    if search_gender:
+        artists = artists.filter(gender=search_gender)
+    if search_birth_date:
+        artists = artists.filter(birth_date=search_birth_date)
+
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="artist_registration.csv"'
     
     writer = csv.writer(response)
     writer.writerow(['이름', '성별', '이메일', '연락처', '상태', '생년월일'])
-    
-    for artist in Artist.objects.all():
+
+    for artist in artists:
         writer.writerow([artist.name, artist.get_gender_display(), artist.email, artist.contact, artist.get_status_display(), artist.birth_date])
     
     return response

@@ -36,8 +36,8 @@ img{max-width: 100%;}
 
 /* 헤더 */
 header{width: 100%; position: fixed; background-color: white; z-index: 99999; padding-top: 30px;}
-header nav{width: 85%; border-bottom: 1px solid black;}
-header nav ul a{padding: 0.5vw 1vw; font-size: 18px;}
+header nav{width: 90%; border-bottom: 1px solid black;}
+header nav ul a{padding: 0.5vw 1vw; font-size: 18px; white-space: nowrap;}
 header nav ul>li{position: relative; display: flex; align-items: center; justify-content: center;}
 header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 18px;}
 
@@ -98,3 +98,11 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
 .registration_btn button{position: absolute; height: 45px; padding: 0 20px; background-color: black; border-radius: 25px; color: white; font-size: 18px; z-index: 100000; white-space: nowrap;}
 .registration_btn button:nth-child(1){top: 1%; left: 0%;}
 .registration_btn button:nth-child(2){top: 1%; left: 15%;}
+
+
+.search-forms{width: 60%; height: 60px; position: relative;}
+.search-forms input:nth-child(3){width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 30px rgb(151, 151, 151); border: none; padding: 30px; font-size: 21px;}
+.search-forms input:focus{outline: none;}
+.search-forms button{width: 130px; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
+.search-forms input:nth-child(2){position: absolute; width: 150px; height: 60px; left: -180px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 16px;}
+.search-forms select{position: absolute; width: 100px; height: 60px; left: -300px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 16px;}

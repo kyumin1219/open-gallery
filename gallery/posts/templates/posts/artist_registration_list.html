@@ -15,17 +15,27 @@
     <main>
         <section class="mt20">
             <div class="container cc">
-                <div>
+                <!-- 검색 폼 -->
+                <form method="GET" action="{% url 'artist_registration_list' %}" class="search-forms mt2">
+                    <select name="gender">
+                        <option value="">성별 선택</option>
+                        <option value="M" {% if request.GET.gender == "M" %}selected{% endif %}>남성</option>
+                        <option value="F" {% if request.GET.gender == "F" %}selected{% endif %}>여성</option>
+                    </select>
+                    <input type="date" name="birth_date" placeholder="생년월일" value="{{ request.GET.birth_date }}">
+                    <input type="text" name="q" placeholder="작가님의 이름, 이메일 또는 연락처로 검색" value="{{ request.GET.q }}">
+                    <button type="submit">검색</button>
+                </form>
+                <form method="POST" action="{% url 'artist_registration_list' %}" class="artist_registration_list tc mt4">
                     <h1>작가 등록 신청 내역</h1>
-                    <a href="{% url 'download_csv' %}" class="csv_download">CSV 다운로드</a>
-                    <!-- 승인/반려 버튼 -->
-                    <div class="registration_btn">
-                        <button type="submit" name="action" value="approve">선택된 항목 승인</button>
-                        <button type="submit" name="action" value="reject">선택된 항목 반려</button>
+                    <div>
+                        <a href="{% url 'download_csv' %}?q={{ request.GET.q }}&gender={{ request.GET.gender }}&birth_date={{ request.GET.birth_date }}" class="csv_download">CSV 다운로드</a>
+                        <!-- 승인/반려 버튼 -->
+                        <div class="registration_btn">
+                            <button type="submit" name="action" value="approve">선택된 항목 승인</button>
+                            <button type="submit" name="action" value="reject">선택된 항목 거부</button>
+                        </div>
                     </div>
-                </div>
-                <!-- 승인/반려 처리 폼 -->
-                <form method="POST" action="{% url 'artist_registration_list' %}" class="artist_registration_list">
                     {% csrf_token %}
                     <!-- 작가 목록 테이블 -->
                     <table class="mt4">
