@@ -15,8 +15,14 @@
         <section class="mt20">
             <div class="container cc">
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artist_list' %}" class="search-form mt2">
-                    <input type="text" name="q" placeholder="작가님의 정보로 검색" value="{{ request.GET.q }}">
+                <form method="GET" action="{% url 'artist_list' %}" class="search-forms mt2">
+                    <select name="gender">
+                        <option value="">성별 선택</option>
+                        <option value="M" {% if request.GET.gender == "M" %}selected{% endif %}>남성</option>
+                        <option value="F" {% if request.GET.gender == "F" %}selected{% endif %}>여성</option>
+                    </select>
+                    <input type="date" name="birth_date" placeholder="생년월일" value="{{ request.GET.birth_date }}">
+                    <input type="text" name="q" placeholder="작가님의 이름, 이메일 또는 연락처로 검색" value="{{ request.GET.q }}">
                     <button type="submit">검색</button>
                 </form>
                 <h1 class="tc mt4">작가 목록</h1>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
+    <title>전시 등록</title>
+</head>
+<body>
+    {% include 'posts/header.html' %}
+
+    <main>
+        <section class="cc mt20">
+            <div class="container cc">
+                <h1 class="tc">전시 등록</h1>
+                <form method="POST" id="register_exhibition" class="mt4 register_exhibition">
+                    {% csrf_token %}
+                    <div class="mt2">
+                        <label for="title">전시 제목:</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="mt2">
+                        <label for="start_date">시작일:</label>
+                        {{ form.start_date }}
+                    </div>
+                    <div class="mt2">
+                        <label for="end_date">종료일:</label>
+                        {{ form.end_date }}
+                    </div>
+                    <div class="mt2">
+                        <label for="artworks">작품 목록:</label>
+                        {{ form.artworks }}
+                    </div>
+                    <div class="mt2 cc">
+                        <button type="submit">등록하기</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

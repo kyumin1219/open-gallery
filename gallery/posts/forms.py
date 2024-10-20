@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .models import Artist, Artwork
+from .models import Artist, Artwork, Exhibition
 
 
 class SignUpForm(forms.ModelForm):
@@ -62,3 +62,34 @@ class ArtworkForm(forms.ModelForm):
         if hoosu < 1 or hoosu > 500:
             raise forms.ValidationError('호수는 1에서 500 사이의 값이어야 합니다.')
         return hoosu
+        
+class ExhibitionForm(forms.ModelForm):
+    class Meta:
+        model = Exhibition
+        fields = ['title', 'start_date', 'end_date', 'artworks']
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+            'artworks': forms.CheckboxSelectMultiple(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(ExhibitionForm, self).__init__(*args, **kwargs)
+        if user:
+            # 현재 로그인한 사용자의 작품만 보여주기
+            self.fields['artworks'].queryset = Artwork.objects.filter(artist=user)
+        else:
+            self.fields['artworks'].queryset = Artwork.objects.none()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+
+        if start_date and end_date and start_date > end_date:
+            raise forms.ValidationError("종료일은 시작일 이후여야 합니다.")
+
+        artworks = cleaned_data.get('artworks')
+        if not artworks:
+            raise forms.ValidationError("작품 목록에서 한 개 이상의 작품을 선택해야 합니다.")

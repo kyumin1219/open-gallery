@@ -104,5 +104,5 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
 .search-forms input:nth-child(3){width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 30px rgb(151, 151, 151); border: none; padding: 30px; font-size: 21px;}
 .search-forms input:focus{outline: none;}
 .search-forms button{width: 130px; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
-.search-forms input:nth-child(2){position: absolute; width: 150px; height: 60px; left: -180px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 16px;}
-.search-forms select{position: absolute; width: 100px; height: 60px; left: -300px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 16px;}
+.search-forms input:nth-child(2){position: absolute; width: 150px; height: 60px; left: -180px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 14px; padding: 10px;}
+.search-forms select{position: absolute; width: 100px; height: 60px; left: -300px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 14px; padding: 10px;}

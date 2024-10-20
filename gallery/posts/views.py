@@ -17,7 +17,7 @@ from django.db.models import Q
 import csv
 from django.http import HttpResponse
 from .models import Artist, Artwork
-from .forms import ArtworkForm
+from .forms import ArtworkForm, ExhibitionForm
 
 class ApiOverview(APIView):
     def get(self, request):
@@ -84,23 +84,31 @@ def signup(request):
 # 작가
 def artist_list(request):
     query = request.GET.get('q', '')  # 검색어를 GET 요청에서 가져옴
-    artists = Artist.objects.filter(status='A').order_by('-id')
+    search_gender = request.GET.get('gender', '')  # 성별 필터링 추가
+    search_birth_date = request.GET.get('birth_date', '')  # 생년월일 필터링 추가
 
-    # 검색어 날짜 형식인지 확인
-    date_pattern = r'^\d{4}.\d{2}.\d{2}$'
+    # 기본적으로 상태가 'A'(승인된) 작가만 필터링
+    artists = Artist.objects.filter(status='A').order_by('-id')
 
     # 검색어가 있는 경우 필터링
     if query:
-        if re.match(date_pattern, query):  # 검색어가 날짜 형식인 경우
-            artists = artists.filter(birth_date=query)
-        else:  # 그 외의 일반적인 필터링
-            artists = artists.filter(
-                Q(name__icontains=query) | 
-                Q(gender__icontains=query) |
-                Q(email__icontains=query) |
-                Q(contact__icontains=query)
-            )
-    
+        artists = artists.filter(
+            Q(name__icontains=query) | 
+            Q(email__icontains=query) |
+            Q(contact__icontains=query)
+        )
+
+    # 성별이 선택된 경우 필터링
+    if search_gender:
+        artists = artists.filter(gender=search_gender)
+
+    # 생년월일이 선택된 경우 필터링
+    if search_birth_date:
+        # 날짜 형식인지 확인
+        date_pattern = r'^\d{4}-\d{2}-\d{2}$'  # 형식을 YYYY-MM-DD로 변경
+        if re.match(date_pattern, search_birth_date):
+            artists = artists.filter(birth_date=search_birth_date)
+
     return render(request, 'posts/artist_list.html', {'artists': artists})
 
 # 작가 신청
@@ -227,3 +235,21 @@ def register_artwork(request):
         form = ArtworkForm()
     
     return render(request, 'posts/register_artwork.html', {'form': form})
+
+# 전시 등록 페이지
+def register_exhibition(request):
+    if request.method == 'POST':
+        form = ExhibitionForm(request.POST)
+        if form.is_valid():
+            exhibition = form.save(commit=False)
+            exhibition.artist = request.user
+            exhibition.save()
+            form.save_m2m()  # Many-to-many 필드를 저장
+            messages.success(request, '전시가 성공적으로 등록되었습니다.')
+            return redirect('exhibition_list')  # 전시 목록 페이지로 이동
+        else:
+            messages.error(request, '입력 값이 올바르지 않습니다. 다시 확인해 주세요.')
+    else:
+        form = ExhibitionForm()
+
+    return render(request, 'posts/register_exhibition.html', {'form': form})

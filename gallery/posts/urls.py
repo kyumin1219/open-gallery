@@ -16,6 +16,7 @@ urlpatterns = [
     path('artist-registration/', views.artist_registration_list, name='artist_registration_list'),
     path('artist-registration/download-csv/', views.download_csv, name='download_csv'),
     path('register_artwork/', views.register_artwork, name='register_artwork'),
+    path('register_exhibition/', views.register_exhibition, name='register_exhibition'),
 ]
 
 if settings.DEBUG:

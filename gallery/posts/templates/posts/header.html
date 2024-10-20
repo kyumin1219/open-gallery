@@ -9,7 +9,7 @@
                 {% if user.is_authenticated and user.artist and user.artist.status == 'A' %}
                     <!-- 작가만 볼 수 있는 메뉴 -->
                     <li><a href="{% url 'register_artwork' %}">작품 등록</a></li>
-                    <li><a href="#">나의 전시</a></li>
+                    <li><a href="{% url 'register_exhibition' %}">전시 등록</a></li>
                 {% endif %}
 
                 {% if user.is_authenticated and user.is_staff %}
