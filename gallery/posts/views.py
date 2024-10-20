@@ -14,7 +14,10 @@ from .forms import SignUpForm, ArtistRegistrationForm
 import logging
 import re
 from django.db.models import Q
+import csv
+from django.http import HttpResponse
 from .models import Artist, Artwork
+from .forms import ArtworkForm
 
 class ApiOverview(APIView):
     def get(self, request):
@@ -48,7 +51,12 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                messages.success(request, '로그인에 성공했습니다!')
                 return redirect('home')
+            else:
+                messages.error(request, '유효하지 않은 로그인 정보입니다.')
+        else:
+            messages.error(request, '아이디 또는 비밀번호가 잘못되었습니다.') 
     else:
         form = AuthenticationForm()
     return render(request, 'posts/login.html', {'form': form})
@@ -56,37 +64,42 @@ def login_view(request):
 # 로그아웃
 def logout_view(request):
     logout(request)
+    messages.info(request, '로그아웃 되었습니다.')
     return redirect('home')
 
 # 회원가입
 logger = logging.getLogger(__name__)
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()  # create_user를 호출하지 않고 form.save()를 통해 User를 생성
-            login(request, user)  # 자동 로그인
-            messages.success(request, '회원가입이 성공적으로 완료되었습니다!')  # 성공 메시지 추가
+            user = form.save()
+            login(request, user)
+            messages.success(request, '회원가입이 성공적으로 완료되었습니다!')
             return redirect('home')
     else:
         form = SignUpForm()
-    
     return render(request, 'posts/signup.html', {'form': form})
 
 # 작가
 def artist_list(request):
     query = request.GET.get('q', '')  # 검색어를 GET 요청에서 가져옴
-    artists = Artist.objects.all().order_by('-id')
+    artists = Artist.objects.filter(status='A').order_by('-id')
+
+    # 검색어 날짜 형식인지 확인
+    date_pattern = r'^\d{4}.\d{2}.\d{2}$'
 
     # 검색어가 있는 경우 필터링
     if query:
-        artists = artists.filter(
-            Q(name__icontains=query) | 
-            Q(gender__icontains=query) |
-            Q(email__icontains=query) |
-            Q(contact__icontains=query)
-        )
+        if re.match(date_pattern, query):  # 검색어가 날짜 형식인 경우
+            artists = artists.filter(birth_date=query)
+        else:  # 그 외의 일반적인 필터링
+            artists = artists.filter(
+                Q(name__icontains=query) | 
+                Q(gender__icontains=query) |
+                Q(email__icontains=query) |
+                Q(contact__icontains=query)
+            )
     
     return render(request, 'posts/artist_list.html', {'artists': artists})
 
@@ -107,22 +120,83 @@ def register_artist(request):
 
         # 이메일 중복 확인
         if Artist.objects.filter(email=email).exists():
-            messages.error(request, '이미 사용 중인 이메일입니다.')
-            return render(request, 'posts/register_artist.html')  # 오류 메시지를 표시한 후 현재 페이지 유지
+            messages.error(request, '이미 등록된 이메일입니다. 다른 이메일을 사용해주세요.')
+            return redirect(request.META.get('HTTP_REFERER', 'register_artist'))
 
-        # Artist 모델에 저장
-        artist = Artist.objects.create(
-            profile_image=profile_image,
-            name=name,
-            gender=gender,
-            birth_date=birth_date,
-            email=email,
-            contact=contact,
-            user=request.user,
-            status='P'  # 상태를 '대기중'으로 설정
-        )
+        try:
+            # Artist 모델에 저장
+            artist = Artist.objects.create(
+                profile_image=profile_image,
+                name=name,
+                gender=gender,
+                birth_date=birth_date,
+                email=email,
+                contact=contact,
+                user=request.user,
+                status='P'  # 상태를 '대기중'으로 설정
+            )
 
-        messages.success(request, '작가 등록이 성공적으로 완료되었습니다.')  # 성공 메시지 추가
-        return redirect('home')  # 성공적으로 등록 후 리디렉션
-     
+            messages.success(request, '작가 등록이 성공적으로 완료되었습니다.')
+            return redirect('home')  # 성공적으로 등록 후 리디렉션
+
+        except IntegrityError:
+            messages.error(request, '데이터베이스 오류가 발생했습니다. 다시 시도해주세요.')
+            return redirect('register_artist')
+
     return render(request, 'posts/register_artist.html')
+
+# 어드민 페이지
+def artist_registration_list(request):
+    query = request.GET.get('q', '')
+    if query:
+        # 이름, 이메일, 연락처로 검색
+        artists = Artist.objects.filter(
+            Q(name__icontains=query) | 
+            Q(email__icontains=query) |
+            Q(contact__icontains=query)
+        ).order_by('-id')
+    else:
+        artists = Artist.objects.all().order_by('-id')
+
+    # 일괄 승인/반려 처리
+    if request.method == 'POST':
+        selected_artists = request.POST.getlist('selected_artists')
+        action = request.POST.get('action')
+        if action == 'approve':
+            Artist.objects.filter(id__in=selected_artists, status='P').update(status='A')
+        elif action == 'reject':
+            Artist.objects.filter(id__in=selected_artists, status='P').update(status='R')
+        return redirect('artist_registration_list')
+
+    return render(request, 'posts/artist_registration_list.html', {'artists': artists})
+
+def download_csv(request):
+    # CSV 다운로드 처리
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="artist_registration.csv"'
+    
+    writer = csv.writer(response)
+    writer.writerow(['이름', '성별', '이메일', '연락처', '상태', '생년월일'])
+    
+    for artist in Artist.objects.all():
+        writer.writerow([artist.name, artist.get_gender_display(), artist.email, artist.contact, artist.get_status_display(), artist.birth_date])
+    
+    return response
+
+# 작품 등록 페이지
+@login_required(login_url='login')
+def register_artwork(request):
+    if request.method == 'POST':
+        form = ArtworkForm(request.POST, request.FILES)
+        if form.is_valid():
+            artwork = form.save(commit=False)
+            artwork.artist = request.user.artist  # 현재 로그인한 사용자의 아티스트 정보
+            artwork.save()
+            messages.success(request, '작품이 성공적으로 등록되었습니다.')
+            return redirect('posts/index.html')
+        else:
+            messages.error(request, '입력값이 올바르지 않습니다. 다시 확인해주세요.')
+    else:
+        form = ArtworkForm()
+    
+    return render(request, 'posts/register_artwork.html', {'form': form})

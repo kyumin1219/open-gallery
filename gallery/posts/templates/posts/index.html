@@ -18,33 +18,26 @@
                 <h1 class="tc">작품 목록</h1>
                 
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artwork_list' %}" class="search-form">
+                <form method="GET" action="{% url 'artwork_list' %}" class="search-form mt4">
                     <input type="text" name="q" placeholder="제목, 가격, 호수로 검색" value="{{ request.GET.q }}">
                     <button type="submit">검색</button>
                 </form>
 
                 <!-- 작품 목록 테이블 -->
                 {% if artworks %}
-                <table class="artwork_list mt6">
-                    <thead>
-                        <tr>
-                            <th>제목</th>
-                            <th>가격</th>
-                            <th>호수</th>
-                            <th>작가</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for artwork in artworks %}
-                        <tr>
-                            <td>{{ artwork.title }}</td>
-                            <td>{{ artwork.price|floatformat:0 }} 원</td>
-                            <td>{{ artwork.hoosu }}</td>
-                            <td>{{ artwork.artist.name }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <ul class="artwork_list mt6">
+                    {% for artwork in artworks %}
+                    <li>
+                        <img src="{{ artwork.artwork_image.url }}" alt="artwork_img" width="300" height="250">
+                        <div>
+                            <p>{{ artwork.title }}</p>
+                            <p>{{ artwork.price|floatformat:0 }} 원</p>
+                            <p>{{ artwork.hoosu }}</p>
+                            <p>{{ artwork.artist.name }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
                 {% endif %}
                 {% if not artworks %}
                 <p class="mt10">작품이 존재하지 않습니다.</p>

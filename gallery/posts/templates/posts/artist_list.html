@@ -16,28 +16,24 @@
             <div class="container cc">
                 <h1 class="tc">작가 목록</h1>
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artist_list' %}" class="search-form">
-                    <input type="text" name="q" placeholder="이름, 성별, 이메일로 검색" value="{{ request.GET.q }}">
+                <form method="GET" action="{% url 'artist_list' %}" class="search-form mt4">
+                    <input type="text" name="q" placeholder="작가님의 정보로 검색" value="{{ request.GET.q }}">
                     <button type="submit">검색</button>
                 </form>
-                <table class="mt6 artist_list">
-                    <tr>
-                        <th>이름</th>
-                        <th>성별</th>
-                        <th>생년월일</th>
-                        <th>이메일</th>
-                        <th>연락처</th>
-                    </tr>
+                <ul class="mt6 artist_list">
                     {% for artist in artists %}
-                    <tr>
-                        <td>{{ artist.name }}</td>
-                        <td>{{ artist.get_gender_display }}</td>
-                        <td>{{ artist.birth_date }}</td>
-                        <td>{{ artist.email }}</td>
-                        <td>{{ artist.contact }}</td>
-                    </tr>
+                    <li>
+                        <img src="{% if artist.profile_image %}{{ artist.profile_image.url }}{% else %}{% static 'posts/images/default_profile.png' %}{% endif %}" alt="profile_img" width="400" height="250">
+                        <div>
+                            <p>{{ artist.name }}</p>
+                            <p>{{ artist.get_gender_display }}</p>
+                            <p>{{ artist.birth_date|date:"Y.m.d" }}</p>
+                            <p>{{ artist.email }}</p>
+                            <p>{{ artist.contact }}</p>
+                        </div>
+                    </li>
                     {% endfor %}
-                </table>
+                </ul>
             </div>
         </section>
     </main>

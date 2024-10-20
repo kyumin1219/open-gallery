@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
+    <title>작가 등록 신청 내역</title>
+</head>
+<body>
+    <!-- 헤더 -->
+    {% include 'posts/header.html' %}
+    
+    <!-- 메인 -->
+    <main>
+        <section class="mt20">
+            <div class="container cc">
+                <div>
+                    <h1>작가 등록 신청 내역</h1>
+                    <a href="{% url 'download_csv' %}" class="csv_download">CSV 다운로드</a>
+                    <!-- 승인/반려 버튼 -->
+                    <div class="registration_btn">
+                        <button type="submit" name="action" value="approve">선택된 항목 승인</button>
+                        <button type="submit" name="action" value="reject">선택된 항목 반려</button>
+                    </div>
+                </div>
+                <!-- 승인/반려 처리 폼 -->
+                <form method="POST" action="{% url 'artist_registration_list' %}" class="artist_registration_list">
+                    {% csrf_token %}
+                    <!-- 작가 목록 테이블 -->
+                    <table class="mt4">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all"></th>
+                                <th></th>
+                                <th>이름</th>
+                                <th>성별</th>
+                                <th>이메일</th>
+                                <th>연락처</th>
+                                <th>상태</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for artist in artists %}
+                            <tr class="tc">
+                                <td>
+                                    {% if artist.status == 'P' %}
+                                    <input type="checkbox" name="selected_artists" value="{{ artist.id }}">
+                                    {% endif %}
+                                </td>
+                                <td><img src="{% if artist.profile_image %}{{ artist.profile_image.url }}{% else %}{% static 'posts/images/default_profile.png' %}{% endif %}" alt="profile_img" width="30" height="30"></td>
+                                <td>{{ artist.name }}</td>
+                                <td>{{ artist.get_gender_display }}</td>
+                                <td>{{ artist.email }}</td>
+                                <td>{{ artist.contact }}</td>
+                                <td>{{ artist.get_status_display }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6">등록 신청된 작가가 없습니다.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('select-all').addEventListener('click', function() {
+            const checkboxes = document.querySelectorAll('input[name="selected_artists"]');
+            checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+        });
+    </script>
+</body>
+</html>

@@ -6,6 +6,17 @@
                 <li><a href="{% url 'home' %}">홈</a></li>
                 <li><a href="{% url 'artist_list' %}">작가 조회</a></li>
                 <li><a href="{% url 'register_artist' %}">작가 등록 신청</a></li>
+                {% if user.is_authenticated and user.artist and user.artist.status == 'A' %}
+                    <!-- 작가만 볼 수 있는 메뉴 -->
+                    <li><a href="{% url 'register_artwork' %}">작품 등록</a></li>
+                    <li><a href="#">나의 전시</a></li>
+                {% endif %}
+
+                {% if user.is_authenticated and user.is_staff %}
+                    <!-- 관리자만 볼 수 있는 메뉴 -->
+                    <li><a href="{% url 'artist_registration_list' %}">작가 등록 신청 내역 조회</a></li>
+                    <li><a href="#">작가 통계</a></li>
+                {% endif %}
             </ul>
             <ul class="userTab fb f18">
                 {% if user.is_authenticated %}
@@ -22,3 +33,21 @@
     </div>
     <!-- 헤더 -->
 </header>
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <script>
+        // 일정 시간(5초) 후에 자동으로 메시지 사라지게 하기
+        setTimeout(function() {
+            let messages = document.querySelector('.messages');
+            if (messages) {
+                messages.style.display = 'none';
+            }
+        }, 5000);  // 5000ms = 5초
+    </script>
+{% endif %}

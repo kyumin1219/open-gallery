@@ -27,5 +27,6 @@ urlpatterns = [
     path('login/', posts.views.login_view, name='login'),  # 로그인 페이지
     path('logout/', posts.views.logout_view, name='logout'),  # 로그아웃 페이지
     path('register_artist/', posts.views.register_artist, name='register_artist'),  # 작가 신청 페이지
+    path('artist_registration_list/', posts.views.artist_registration_list, name='artist_registration_list'),  # 작가 신청 내역 조회 페이지
     path('', include('posts.urls')),
 ]

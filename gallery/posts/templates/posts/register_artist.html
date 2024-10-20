@@ -9,6 +9,7 @@
 </head>
 <body>
     {% include 'posts/header.html' %}
+    
     <main>
         <section class="cc mt20">
             <div class="container cc">
@@ -17,7 +18,7 @@
                     {% csrf_token %}
                     {{ form.as_p }} 
                     <div class="mt2">
-                        <label for="name">프로필 사진:</label>
+                        <label for="profile_image">프로필 사진:</label>
                         <input type="file" id="profile_image" name="profile_image">
                     </div>
                     <div class="mt2">

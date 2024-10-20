@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
-from .models import Artist
+from .models import Artist, Artwork
 
 
 class SignUpForm(forms.ModelForm):
@@ -45,3 +45,20 @@ class ArtistRegistrationForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
             'contact': forms.TextInput(attrs={'placeholder': '000-0000-0000'}),
         }
+
+class ArtworkForm(forms.ModelForm):
+    class Meta:
+        model = Artwork
+        fields = ['title', 'price', 'hoosu', 'artwork_image']
+
+    def clean_price(self):
+        price = self.cleaned_data.get('price')
+        if price < 0:
+            raise forms.ValidationError('가격은 0 이상의 숫자여야 합니다.')
+        return price
+
+    def clean_hoosu(self):
+        hoosu = self.cleaned_data.get('hoosu')
+        if hoosu < 1 or hoosu > 500:
+            raise forms.ValidationError('호수는 1에서 500 사이의 값이어야 합니다.')
+        return hoosu
