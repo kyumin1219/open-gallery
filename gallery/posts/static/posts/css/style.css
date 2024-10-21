@@ -122,3 +122,8 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
 /* 전시 등록 페이지 */
 .register_exhibition .artwokrs div input{width: 20px; height: 20px;}
 .register_exhibition .artwokrs div label{height: 20px; font-size: 18px;}
+
+/* 통계 페이지 */
+.statistics_table{position: relative; width: 120%;}
+.statistics_table tr{position: relative; width: 100%; height: 50px;}
+.statistics_table img{border-radius: 50%; box-shadow: 0 0 10px rgb(151, 151, 151); position: absolute;}

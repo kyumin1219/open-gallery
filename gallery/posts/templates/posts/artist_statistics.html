@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
+    {% load humanize %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
@@ -18,7 +19,7 @@
                 <h1 class="tc">작가 통계</h1>
                 
                 <!-- 통계 테이블 -->
-                <table class="statistics_table mt6">
+                <table class="statistics_table mt4">
                     <thead>
                         <tr>
                             <th>작가 이름</th>
@@ -31,11 +32,11 @@
                     </thead>
                     <tbody>
                         {% for stat in artist_stats %}
-                        <tr>
+                        <tr class="tc">
                             <td>{{ stat.artist.name }}</td>
                             <td>{{ stat.artist.get_gender_display }}</td>
                             <td>{{ stat.artwork_count_below_100 }}</td>
-                            <td>₩{{ stat.average_price|floatformat:0 }}</td><td>
+                            <td>₩{{ stat.average_price|floatformat:0|intcomma }}</td><td>
                                 {% if stat.most_expensive_artwork %}
                                     {{ stat.most_expensive_artwork.title }}
                                 {% else %}
@@ -43,7 +44,7 @@
                                 {% endif %}
                             </td><td>
                                 {% if stat.most_expensive_artwork %}
-                                    ₩{{ stat.most_expensive_artwork.price|floatformat:0 }}
+                                    ₩{{ stat.most_expensive_artwork.price|floatformat:0|intcomma }}
                                 {% else %}
                                     N/A
                                 {% endif %}
