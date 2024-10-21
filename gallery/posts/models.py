@@ -40,7 +40,7 @@ class Artwork(models.Model):
 
 # 전시 모델
 class Exhibition(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)  # 작가와 1:N 관계
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=False)  # 작가와 1:N 관계
     title = models.CharField(max_length=64)
     start_date = models.DateField()
     end_date = models.DateField()

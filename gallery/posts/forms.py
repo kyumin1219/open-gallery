@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import Artist, Artwork, Exhibition
+from django.core.exceptions import ValidationError
 
 
 class SignUpForm(forms.ModelForm):
@@ -74,13 +75,8 @@ class ExhibitionForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
+        self.user = kwargs.pop('user', None)  # user를 kwargs에서 꺼냄
         super(ExhibitionForm, self).__init__(*args, **kwargs)
-        if user:
-            # 현재 로그인한 사용자의 작품만 보여주기
-            self.fields['artworks'].queryset = Artwork.objects.filter(artist=user)
-        else:
-            self.fields['artworks'].queryset = Artwork.objects.none()
 
     def clean(self):
         cleaned_data = super().clean()

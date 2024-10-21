@@ -237,19 +237,19 @@ def register_artwork(request):
     return render(request, 'posts/register_artwork.html', {'form': form})
 
 # 전시 등록 페이지
+@login_required
 def register_exhibition(request):
     if request.method == 'POST':
         form = ExhibitionForm(request.POST)
         if form.is_valid():
             exhibition = form.save(commit=False)
-            exhibition.artist = request.user
+            # 현재 로그인된 유저의 아티스트 가져오기
+            artist = Artist.objects.get(user=request.user)
+            exhibition.artist = artist
             exhibition.save()
-            form.save_m2m()  # Many-to-many 필드를 저장
             messages.success(request, '전시가 성공적으로 등록되었습니다.')
-            return redirect('exhibition_list')  # 전시 목록 페이지로 이동
-        else:
-            messages.error(request, '입력 값이 올바르지 않습니다. 다시 확인해 주세요.')
+            return redirect('home')
     else:
         form = ExhibitionForm()
-
+    
     return render(request, 'posts/register_exhibition.html', {'form': form})
