@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
+    <title>Artist Statistics</title>
+</head>
+<body>
+    <!-- 헤더 -->
+    {% include 'posts/header.html' %}
+
+    <!-- 메인 -->
+    <main>
+        <section class="mt20">
+            <div class="container cc">
+                <h1 class="tc">작가 통계</h1>
+                
+                <!-- 통계 테이블 -->
+                <table class="statistics_table mt6">
+                    <thead>
+                        <tr>
+                            <th>작가 이름</th>
+                            <th>성별</th>
+                            <th>작품 개수 (100호 이하)</th>
+                            <th>평균 가격</th>
+                            <th>최고가 작품</th>
+                            <th>최고가 작품 가격</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stat in artist_stats %}
+                        <tr>
+                            <td>{{ stat.artist.name }}</td>
+                            <td>{{ stat.artist.get_gender_display }}</td>
+                            <td>{{ stat.artwork_count_below_100 }}</td>
+                            <td>₩{{ stat.average_price|floatformat:0 }}</td><td>
+                                {% if stat.most_expensive_artwork %}
+                                    {{ stat.most_expensive_artwork.title }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td><td>
+                                {% if stat.most_expensive_artwork %}
+                                    ₩{{ stat.most_expensive_artwork.price|floatformat:0 }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="tc">통계 데이터가 없습니다.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

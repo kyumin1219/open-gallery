@@ -17,7 +17,7 @@
         <section class="mt20">
             <div class="container cc">
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artwork_list' %}" class="search-form mt2 cc">
+                <form method="GET" action="{% url 'artwork_list' %}" class="search_form mt2 cc">
                     <!-- 제목 검색 -->
                     <input type="text" name="q" placeholder="제목으로 검색" value="{{ request.GET.q }}">
 

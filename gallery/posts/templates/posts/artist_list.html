@@ -15,7 +15,7 @@
         <section class="mt20">
             <div class="container cc">
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artist_list' %}" class="search-forms mt2">
+                <form method="GET" action="{% url 'artist_list' %}" class="search_forms mt2">
                     <select name="gender">
                         <option value="">성별 선택</option>
                         <option value="M" {% if request.GET.gender == "M" %}selected{% endif %}>남성</option>

@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
+from django.db.models import Avg, Count
 from rest_framework import status
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -276,3 +277,47 @@ def register_exhibition(request):
         form = ExhibitionForm()
     
     return render(request, 'posts/register_exhibition.html', {'form': form})
+
+# 작품 통계 페이지
+def artist_statistics(request):
+    # 모든 작가 목록을 가져옴
+    artists = Artist.objects.all()
+
+    # 통계 데이터를 담을 리스트
+    artist_stats = []
+
+    for artist in artists:
+        # 해당 작가의 작품 목록을 가져옴
+        artworks = Artwork.objects.filter(artist=artist)
+
+        if artworks.exists():
+            # 100호 이하의 작품 개수
+            artwork_count_below_100 = artworks.filter(hoosu__lte=100).count()
+
+            # 모든 작품의 평균 가격
+            average_price = artworks.aggregate(Avg('price'))['price__avg']
+
+            # 가장 비싼 작품
+            most_expensive_artwork = artworks.order_by('-price').first()
+
+            # 가장 저렴한 작품
+            least_expensive_artwork = artworks.order_by('price').first()
+
+            # 해당 작가의 통계 데이터를 리스트에 추가
+            artist_stats.append({
+                'artist': artist,
+                'artwork_count_below_100': artwork_count_below_100,
+                'average_price': average_price if average_price else 0,
+                'most_expensive_artwork': most_expensive_artwork,
+                'least_expensive_artwork': least_expensive_artwork,
+            })
+        else:
+            artist_stats.append({
+                'artist': artist,
+                'artwork_count_below_100': 0,
+                'average_price': 0,
+                'most_expensive_artwork': None,
+                'least_expensive_artwork': None,
+            })
+
+    return render(request, 'posts/artist_statistics.html', {'artist_stats': artist_stats})

@@ -15,7 +15,7 @@
                 {% if user.is_authenticated and user.is_staff %}
                     <!-- 관리자만 볼 수 있는 메뉴 -->
                     <li><a href="{% url 'artist_registration_list' %}">작가 등록 신청 내역 조회</a></li>
-                    <li><a href="#">작가 통계</a></li>
+                    <li><a href="{% url 'artist_statistics' %}">작가 통계</a></li>
                 {% endif %}
             </ul>
             <ul class="userTab fb f18">
