@@ -14,25 +14,29 @@
         <section class="cc mt20">
             <div class="container cc">
                 <h1 class="tc">전시 등록</h1>
-                <form method="POST" id="register_exhibition" class="mt4 register_exhibition">
+                <div class="line mt2" style="background-color: black; height: 3px;"></div>
+                <form method="POST" id="register_exhibition" class="register_artwork register_exhibition">
                     {% csrf_token %}
-                    <div class="mt2">
+                    <div class="mt2 f hc">
                         <label for="title">전시 제목:</label>
                         {{ form.title }}
                     </div>
-                    <div class="mt2">
+                    <div class="line mt2"></div>
+                    <div class="mt2 f hc">
                         <label for="start_date">시작일:</label>
                         {{ form.start_date }}
                     </div>
-                    <div class="mt2">
+                    <div class="line mt2"></div>
+                    <div class="mt2 f hc">
                         <label for="end_date">종료일:</label>
                         {{ form.end_date }}
                     </div>
-                    <div class="mt2">
+                    <div class="line mt2"></div>
+                    <div class="mt2 f hc artwokrs">
                         <label for="artworks">작품 목록:</label>
                         {{ form.artworks }}
                     </div>
-                    <div class="mt2 cc">
+                    <div class="mt2 f hc cc">
                         <button type="submit">등록하기</button>
                     </div>
                 </form>

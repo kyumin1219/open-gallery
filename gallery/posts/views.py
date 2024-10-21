@@ -222,19 +222,25 @@ def download_csv(request):
 @login_required(login_url='login')
 def register_artwork(request):
     if request.method == 'POST':
+        # 가격의 콤마 제거
+        request.POST = request.POST.copy()
+        if 'price' in request.POST:
+            request.POST['price'] = request.POST['price'].replace(',', '')
+
         form = ArtworkForm(request.POST, request.FILES)
         if form.is_valid():
             artwork = form.save(commit=False)
             artwork.artist = request.user.artist  # 현재 로그인한 사용자의 아티스트 정보
             artwork.save()
             messages.success(request, '작품이 성공적으로 등록되었습니다.')
-            return redirect('posts/index.html')
+            return redirect('home')  # URL name 수정
         else:
             messages.error(request, '입력값이 올바르지 않습니다. 다시 확인해주세요.')
     else:
         form = ArtworkForm()
     
     return render(request, 'posts/register_artwork.html', {'form': form})
+
 
 # 전시 등록 페이지
 @login_required
@@ -247,6 +253,11 @@ def register_exhibition(request):
             artist = Artist.objects.get(user=request.user)
             exhibition.artist = artist
             exhibition.save()
+            
+            # 선택된 작품만 저장
+            artworks = form.cleaned_data.get('artworks')
+            exhibition.artworks.set(artworks)  # 선택된 작품 저장
+
             messages.success(request, '전시가 성공적으로 등록되었습니다.')
             return redirect('home')
     else:

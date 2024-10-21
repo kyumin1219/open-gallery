@@ -5,6 +5,7 @@ section{position: relative;}
 ul, li{list-style: none;}
 a, label, button{cursor: pointer; color: black; display: inline-block; text-decoration: none; border: none;}
 img{max-width: 100%;}
+input:focus{outline: none;}
 
 /* 기본 정렬 방식 */
 .f, .fc, .fb, .fla{display: flex;}
@@ -68,7 +69,6 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
 /* 작가 목록 페이지 */
 .search-form{width: 60%; height: 60px; position: relative;}
 .search-form input{width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 30px rgb(151, 151, 151); border: none; padding: 30px; font-size: 21px;}
-.search-form input:focus{outline: none;}
 .search-form button{width: 130px; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
 .artist_list{width: 100%; height: 100%; position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px;}
 .artist_list li{width: 100%; height: 400px; position: relative; border-radius: 5px; border: 1px solid #c5c5c5;}
@@ -99,10 +99,20 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
 .registration_btn button:nth-child(1){top: 1%; left: 0%;}
 .registration_btn button:nth-child(2){top: 1%; left: 15%;}
 
-
+/* 검색 */
 .search-forms{width: 60%; height: 60px; position: relative;}
 .search-forms input:nth-child(3){width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 30px rgb(151, 151, 151); border: none; padding: 30px; font-size: 21px;}
-.search-forms input:focus{outline: none;}
 .search-forms button{width: 130px; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
 .search-forms input:nth-child(2){position: absolute; width: 150px; height: 60px; left: -180px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 14px; padding: 10px;}
 .search-forms select{position: absolute; width: 100px; height: 60px; left: -300px; border: none; border-radius: 25px; box-shadow: 0 0 20px rgb(151, 151, 151); font-size: 14px; padding: 10px;}
+
+/* 작품 등록 페이지 */
+.register_artwork{width: 100%; font-size: 21px;}
+.register_artwork div label{margin-left: 100px; white-space: nowrap;}
+.register_artwork div input{margin-left: 50px; border-radius: 5px; width: 300px; height: 50px; font-size: 21px; padding: 10px;}
+.line{width: 100%; height: 1px; background-color: #c2c2c2;}
+.register_artwork button{width: 130px; height: 45px; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
+
+/* 전시 등록 페이지 */
+.register_exhibition .artwokrs div input{width: 20px; height: 20px;}
+.register_exhibition .artwokrs div label{height: 20px; font-size: 18px;}
