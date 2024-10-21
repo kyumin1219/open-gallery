@@ -15,8 +15,8 @@
     <main>
         <section class="cc mt20">
             <div class="container login mt4">
-                <h2 class="cc">Login Page</h2>
-                <form action="{% url 'login' %}" method="post" class="mt6">
+                <p class="cc f30" style="font-weight: bold;">Login Page</p>
+                <form action="{% url 'login' %}" method="post" class="mt6 f18">
                     {% csrf_token %}
                     <div class="mt2">
                         <p>아이디 : </p>
@@ -27,10 +27,10 @@
                         <input type="password" id="password" name="password" required placeholder="비밀번호를 입력해주세요.">
                     </div>
                     <div>
-                        <button type="submit">로그인</button>
+                        <button type="submit" class="btn">로그인</button>
                     </div>
                 </form>
-                <p class="signup_href">아직 회원이 아니시라면? <a href="{% url 'signup' %}">회원가입</a></p>
+                <p class="signup_href f14">아직 회원이 아니시라면? <a href="{% url 'signup' %}">회원가입</a></p>
             </div>
         </section>
     </main>

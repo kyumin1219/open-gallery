@@ -22,7 +22,7 @@
                     <input type="text" name="q" placeholder="제목으로 검색" value="{{ request.GET.q }}">
 
                     <!-- 가격 또는 호수 선택 -->
-                    <select name="filter_type">
+                    <select name="filter_type" class="f14">
                         <option value="">가격 또는 호수</option>
                         <option value="price" {% if request.GET.filter_type == 'price' %}selected{% endif %}>가격</option>
                         <option value="hoosu" {% if request.GET.filter_type == 'hoosu' %}selected{% endif %}>호수</option>
@@ -33,18 +33,18 @@
                     <span>~</span>
                     <input type="number" name="max_value" placeholder="최대" value="{{ request.GET.max_value }}">
 
-                    <button type="submit">검색</button>
+                    <button type="submit" class="search_btn">검색</button>
                 </form>
-                <h1 class="tc mt4">작품 목록</h1>
+                <p class="cc title f24 mt4" style="font-weight: bold;">작품 목록</p>
 
                 <!-- 작품 목록 테이블 -->
                 {% if artworks %}
                 <ul class="artwork_list mt6">
                     {% for artwork in artworks %}
                     <li>
-                        <img src="{{ artwork.artwork_image.url }}" alt="artwork_img" width="300" height="250">
-                        <div>
-                            <p>{{ artwork.title }}</p>
+                        <img src="{{ artwork.artwork_image.url }}" alt="artwork_img">
+                        <div class="f14">
+                            <p class="f18" style="font-weight: bold;">{{ artwork.title }}</p>
                             <p>{{ artwork.price|floatformat:0|intcomma }} 원</p>
                             <p>{{ artwork.hoosu }}호</p>
                             <p>{{ artwork.artist.name }}</p>

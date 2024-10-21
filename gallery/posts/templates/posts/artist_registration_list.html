@@ -17,30 +17,30 @@
             <div class="container cc">
                 <!-- 검색 폼 -->
                 <form method="GET" action="{% url 'artist_registration_list' %}" class="search_forms mt2">
-                    <select name="gender">
+                    <select class="f14" name="gender">
                         <option value="">성별 선택</option>
                         <option value="M" {% if request.GET.gender == "M" %}selected{% endif %}>남성</option>
                         <option value="F" {% if request.GET.gender == "F" %}selected{% endif %}>여성</option>
                     </select>
-                    <input type="date" name="birth_date" placeholder="생년월일" value="{{ request.GET.birth_date }}">
-                    <input type="text" name="q" placeholder="작가님의 이름, 이메일 또는 연락처로 검색" value="{{ request.GET.q }}">
-                    <button type="submit">검색</button>
+                    <input type="date" class="f14" name="birth_date" placeholder="생년월일" value="{{ request.GET.birth_date }}">
+                    <input type="text" class="f18" name="q" placeholder="작가님의 이름, 이메일 또는 연락처로 검색" value="{{ request.GET.q }}">
+                    <button type="submit" class="search_btn f18">검색</button>
                 </form>
                 <form method="POST" action="{% url 'artist_registration_list' %}" class="artist_registration_list tc mt4">
-                    <h1>작가 등록 신청 내역</h1>
+                    <p class="cc title f24" style="font-weight: bold;">작가 등록 신청 내역</p>
                     <div>
-                        <a href="{% url 'download_csv' %}?q={{ request.GET.q }}&gender={{ request.GET.gender }}&birth_date={{ request.GET.birth_date }}" class="csv_download">CSV 다운로드</a>
+                        <a href="{% url 'download_csv' %}?q={{ request.GET.q }}&gender={{ request.GET.gender }}&birth_date={{ request.GET.birth_date }}" class="csv_download f14">CSV 다운로드</a>
                         <!-- 승인/반려 버튼 -->
                         <div class="registration_btn">
-                            <button type="submit" name="action" value="approve">선택된 항목 승인</button>
-                            <button type="submit" name="action" value="reject">선택된 항목 거부</button>
+                            <button class="btn" type="submit" name="action" value="approve">선택된 항목 승인</button>
+                            <button class="btn" type="submit" name="action" value="reject">선택된 항목 거부</button>
                         </div>
                     </div>
                     {% csrf_token %}
                     <!-- 작가 목록 테이블 -->
                     <table class="mt4">
                         <thead>
-                            <tr>
+                            <tr class="f21">
                                 <th><input type="checkbox" id="select-all"></th>
                                 <th></th>
                                 <th>이름</th>
@@ -52,13 +52,13 @@
                         </thead>
                         <tbody>
                             {% for artist in artists %}
-                            <tr class="tc">
+                            <tr class="tc f16">
                                 <td>
                                     {% if artist.status == 'P' %}
                                     <input type="checkbox" name="selected_artists" value="{{ artist.id }}">
                                     {% endif %}
                                 </td>
-                                <td><img src="{% if artist.profile_image %}{{ artist.profile_image.url }}{% else %}{% static 'posts/images/default_profile.png' %}{% endif %}" alt="profile_img" width="30" height="30"></td>
+                                <td><img src="{% if artist.profile_image %}{{ artist.profile_image.url }}{% else %}{% static 'posts/images/default_profile.png' %}{% endif %}" alt="profile_img"></td>
                                 <td>{{ artist.name }}</td>
                                 <td>{{ artist.get_gender_display }}</td>
                                 <td>{{ artist.email }}</td>

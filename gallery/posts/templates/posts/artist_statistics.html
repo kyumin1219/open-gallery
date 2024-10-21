@@ -16,12 +16,13 @@
     <main>
         <section class="mt20">
             <div class="container cc">
-                <h1 class="tc">작가 통계</h1>
+                <p class="tc f24 title" style="font-weight: bold;">작가 통계</p>
                 
+                <div class="line mt4" style="background-color: black; height: 2px; width: 110%;"></div>
                 <!-- 통계 테이블 -->
-                <table class="statistics_table mt4">
+                <table class="statistics_table mts">
                     <thead>
-                        <tr>
+                        <tr class="f21">
                             <th>작가 이름</th>
                             <th>성별</th>
                             <th>작품 개수 (100호 이하)</th>
@@ -32,7 +33,7 @@
                     </thead>
                     <tbody>
                         {% for stat in artist_stats %}
-                        <tr class="tc">
+                        <tr class="tc f16">
                             <td>{{ stat.artist.name }}</td>
                             <td>{{ stat.artist.get_gender_display }}</td>
                             <td>{{ stat.artwork_count_below_100 }}</td>

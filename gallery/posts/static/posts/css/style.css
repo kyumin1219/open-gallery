@@ -1,7 +1,7 @@
 *{margin: 0; padding: 0; box-sizing: border-box; line-height: 1.5em;}
 body{width: 100%;}
 section{position: relative;}
-.container{width: 1320px; position: relative; margin: 0 auto;}
+.container{width: 70vw; position: relative; margin: 0 auto;}
 ul, li{list-style: none;}
 a, label, button{cursor: pointer; color: black; display: inline-block; text-decoration: none; border: none;}
 img{max-width: 100%;}
@@ -35,95 +35,122 @@ input:focus{outline: none;}
 .mt20{padding-top: 7vw; padding-bottom: 7vw;}
 .mtm20{margin-top: 10vw;}
 
+/* 폰트 */
+.f60{font-size: 3.5em; font-family: "맑은 고딕"; letter-spacing: -2px;}
+.f40{font-size: 2vw; font-family: "맑은 고딕"; letter-spacing: -2px;}
+.f30{font-size: 1.5vw; font-family: "맑은 고딕"; letter-spacing: -1px;}
+.f28{font-size: 1.45vw; font-family: "맑은 고딕"; letter-spacing: -1px;}
+.f24{font-size: 1.25vw; font-family: "맑은 고딕"; letter-spacing: -1px;}
+.f21{font-size: 1vw; font-family: "맑은 고딕"; letter-spacing: -1px;}
+.f18{font-size: .9vw; font-family: "맑은 고딕";}
+.f16{font-size: .83vw; font-family: "맑은 고딕";}
+.f14{font-size: .7vw; font-family: "맑은 고딕";}
+
+/* 버튼 */
+.search_btn{width: 6.7vw; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 1.3vw; color: white;}
+.btn{position: absolute; height: 2.3vw; padding: 0 1vw; background-color: black; border-radius: 25px; color: white; font-size: .9vw; z-index: 100000; white-space: nowrap;}
+
 /* 헤더 */
 header{width: 100%; position: fixed; background-color: white; z-index: 99999; padding-top: 30px;}
 header nav{width: 90%; border-bottom: 1px solid black;}
-header nav ul a{padding: 0.5vw 1vw; font-size: 18px; white-space: nowrap;}
+header nav ul a{padding: 0.5vw 1vw; font-size: 1vw; white-space: nowrap;}
 header nav ul>li{position: relative; display: flex; align-items: center; justify-content: center;}
-header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 18px;}
+header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 1vw;}
 
 /* 로그인 페이지 */
-.login{width: 50%; height: 65vh; padding: 40px; border-radius: 15px; box-shadow: 0 0 30px rgb(151, 151, 151);}
-.login form div{font-size: 18px;}
-.login input{width: 100%; height: 45px; border-radius: 15px; border: 1px solid black; padding-left: 20px; font-size: 18px;}
-.login form button{position: relative; width: 100px; height: 45px; padding: 0 20px; top: 40%; font-size: 18px; border-radius: 45px; background-color: black; color: white;}
+.login{width: 50%; height: 65vh; padding: 40px; border-radius: 15px; box-shadow: 0 0 1.56vw rgb(151, 151, 151);}
+.login input{width: 100%; height: 2.3vw; border-radius: 15px; border: 1px solid black; padding-left: 20px; font-size: .9vw;}
 .login form div:nth-child(4){position: absolute; bottom: 5%; left: 50%; transform: translate(-50%, -50%);}
 .login .signup_href{position: absolute; bottom: 5%; right: 5%; color: #b0b0b0;}
 .login .signup_href a{margin-left: 7px; color: #8b8b8b; border-bottom: 2px solid #8b8b8b;}
+.login form button{position: relative; width: 100px; height: 2.3vw; padding: 0 20px; top: 40%;  border-radius: 2.3vw; background-color: black; color: white;}
 
 /* 회원가입 페이지 */
-.signup{width: 50%; height: 65vh; padding: 40px; border-radius: 15px; box-shadow: 0 0 30px rgb(151, 151, 151);}
-.signup form div{font-size: 18px;}
-.signup input{width: 100%; height: 45px; border-radius: 15px; border: 1px solid black; padding-left: 20px; font-size: 18px;}
-.signup form button{position: relative; width: 150px; height: 45px; padding: 0 20px; top: 40%; font-size: 18px; border-radius: 45px; background-color: black; color: white;}
+.signup{width: 50%; height: 65vh; padding: 40px; border-radius: 15px; box-shadow: 0 0 1.56vw rgb(151, 151, 151);}
+.signup input{width: 100%; height: 2.3vw; border-radius: 15px; border: 1px solid black; padding-left: 20px; font-size: 1vw;}
 .signup form div:nth-child(6){position: absolute; bottom: 5%; left: 50%; transform: translate(-50%, -50%);}
+.signup form button{position: relative; width: 150px; height: 2.3vw; padding: 0 20px; top: 40%; border-radius: 2.3vw; background-color: black; color: white;}
 
 /* 작가 신청 페이지 */
-.register_artist{width: 60%; padding: 30px; border-radius: 15px; box-shadow: 0 0 30px rgb(151, 151, 151);}
+.register_artist{width: 60%; padding: 1.56vw; border-radius: 15px; box-shadow: 0 0 1.56vw rgb(151, 151, 151);}
 .register_artist>div{position: relative; width: 100%; height: 100%;}
-.register_artist>div>label{font-size: 21px;}
-.register_artist>div>input{position: absolute; width: 60%; height: 30px; right: 0;}
-.register_artist>div>select{position: absolute; width: 60%; height: 30px; right: 0;}
-.register_artist>div button{width: 100px; height: 45px; padding: 0 20px; font-size: 18px; border-radius: 45px; background-color: black; color: white; white-space: nowrap;}
+.register_artist>div>input{position: absolute; width: 60%; height: 1.56vw; right: 0; font-size: .8vw;}
+.register_artist>div>select{position: absolute; width: 60%; height: 1.56vw; right: 0;}
+.register_artist>div button{position: relative !important;}
 
 /* 작가 목록 페이지 */
-.search_form{width: 60%; height: 60px; position: relative;}
-.search_form input{width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 10px rgb(151, 151, 151); border: none; padding: 30px; font-size: 21px;}
-.search_form input:nth-child(3), .search_form input:nth-child(5){width: 90px; height: 80%; position: absolute; border-radius: 25px; box-shadow: 0 0 10px rgb(205, 205, 205); border: none; padding: 20px; font-size: 16px;}
-.search_form input:nth-child(3){left: -240px;}
-.search_form input:nth-child(5){left: -120px;}
-.search_form span{position: absolute; left: -140px; font-size: 18px;}
-.search_form select{position: absolute; left: -350px; width: 80px; height: 80%; border-radius: 10px; border: none; box-shadow: 0 0 10px rgb(205, 205, 205);}
+.search_form{width: 60%; height: 3.1vw; position: relative;}
+.search_form input{width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 10px rgb(151, 151, 151); border: none; padding: 1.5vw; font-size: 1vw;}
+.search_form input:nth-child(3), .search_form input:nth-child(5){width: 4.6vw; height: 80%; position: absolute; border-radius: 25px; box-shadow: 0 0 10px rgb(205, 205, 205); border: none; padding: 1vw; font-size: .83vw}
+.search_form input:nth-child(3){left: -12.5vw;}
+.search_form input:nth-child(5){left: -6.25vw;}
+.search_form span{position: absolute; left: -7.3vw; font-size: .9vw;}
+.search_form select{position: absolute; left: -18.2vw; width: 4.1vw; height: 80%; border-radius: 10px; border: none; box-shadow: 0 0 10px rgb(205, 205, 205);}
 
-.search_form button{width: 130px; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
 .artist_list{width: 100%; height: 100%; position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 100px;}
-.artist_list li{width: 100%; height: 400px; position: relative; border-radius: 5px; border: 1px solid #c5c5c5;}
+.artist_list li{width: 100%; height: 20vw; position: relative; border-radius: 5px; border: 1px solid #c5c5c5;}
+.artist_list li img{width: 20vw; height: 13vw;}
 .artist_list li div{margin-left: 30px; margin-bottom: 30px;}
-.artist_list li p:nth-child(1){font-size: 18px; font-weight: bold;}
-.artist_list li div>p{font-size: 14px;}
 
 /* 작품 목록 페이지 */
 .artwork_list{width: 100%; height: 100%; position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 100px;}
-.artwork_list li{width: 300px; height: 400px; position: relative; border-radius: 5px; border: 1px solid #c5c5c5;}
+.artwork_list li{width: 15.6vw; height: 20vw; position: relative; border-radius: 5px; border: 1px solid #c5c5c5;}
+.artwork_list li img{width: 15.6vw; height: 13vw;}
 .artwork_list li div{margin-left: 30px;}
-.artwork_list li p:nth-child(1){font-size: 18px; font-weight: bold;}
-.artwork_list li div>p{font-size: 14px;}
 
 /* 메세지 알림 창 */
 .messages{position: fixed; top: 30px; right: 30px; z-index: 10000000; padding: 20px;}
-.alert{padding: 15px 20px; margin-bottom: 10px; border-radius: 15px; box-shadow: 0 0 10px rgb(151, 151, 151); font-size: 16px; position: relative; font-size: 21px; font-weight: bold; color: black;}
+.alert{padding: .8vw 1vw; margin-bottom: 10px; border-radius: 15px; box-shadow: 0 0 10px rgb(151, 151, 151); position: relative; font-size: .8vw; font-weight: bold; color: black;}
 
 /* 작가 등록 신청 내역 페이지 */
 .artist_registration_list{position: relative; width: 120%; height: 70vh;}
-.artist_registration_list table{position: relative; width: 100%;}
-.artist_registration_list table tr{position: relative; width: 100%; height: 50px;}
+.artist_registration_list table{position: relative; width: 100%; border-spacing: 20px;}
+.artist_registration_list table tr{position: relative; width: 100%;}
 .artist_registration_list button{position: absolute; bottom: 0;}
-.artist_registration_list table img{border-radius: 50%; box-shadow: 0 0 10px rgb(151, 151, 151); position: absolute;}
-.artist_registration_list table tr td:nth-child(2){width: 30px; position: absolute; margin-top: 10px; left: 2%;}
+.artist_registration_list table img{width: 30px; height: 30px; border-radius: 50%; box-shadow: 0 0 10px rgb(151, 151, 151); position: absolute;}
+.artist_registration_list table tr td:nth-child(2){width: 30px; height: 30px; position: absolute; left: 2%;}
 .csv_download{position: absolute; top: 1%; right: 5%; border-bottom: 1px solid #8b8b8b;}
-.registration_btn button{position: absolute; height: 45px; padding: 0 20px; background-color: black; border-radius: 25px; color: white; font-size: 18px; z-index: 100000; white-space: nowrap;}
 .registration_btn button:nth-child(1){top: 1%; left: 0%;}
 .registration_btn button:nth-child(2){top: 1%; left: 15%;}
 
 /* 검색 */
-.search_forms{width: 60%; height: 60px; position: relative;}
-.search_forms input:nth-child(3){width: 80%; height: 100%; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 10px rgb(151, 151, 151); border: none; padding: 30px; font-size: 21px;}
-.search_forms button{width: 130px; height: 100%; position: absolute; right: 0; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
-.search_forms input:nth-child(2){position: absolute; width: 150px; height: 60px; left: -180px; border: none; border-radius: 25px; box-shadow: 0 0 10px rgb(205, 205, 205); font-size: 14px; padding: 10px;}
-.search_forms select{position: absolute; width: 100px; height: 60px; left: -300px; border: none; border-radius: 25px; box-shadow: 0 0 10px rgb(205, 205, 205); font-size: 14px; padding: 10px;}
+.search_forms{width: 60%; height: 3vw; position: relative;}
+.search_forms input, .search_forms select{font-size: .7vw;}
+.search_forms input:nth-child(3){width: 80%; height: 3vw; position: absolute; left: 0; border-radius: 25px; box-shadow: 0 0 10px rgb(151, 151, 151); border: none; padding: 1.5vw; font-size: 1vw;}
+.search_forms input:nth-child(2){position: absolute; width: 7.8vw; height: 3vw; left: -9.3vw; border: none; border-radius: 25px; box-shadow: 0 0 10px rgb(205, 205, 205); padding: 10px;}
+.search_forms select{position: absolute; width: 5.2vw; height: 3vw; left: -15.6vw; border: none; border-radius: 25px; box-shadow: 0 0 10px rgb(205, 205, 205); padding: 10px;}
 
 /* 작품 등록 페이지 */
-.register_artwork{width: 100%; font-size: 21px;}
-.register_artwork div label{margin-left: 100px; white-space: nowrap;}
-.register_artwork div input{margin-left: 50px; border-radius: 5px; width: 300px; height: 50px; font-size: 21px; padding: 10px;}
+.register_artwork{width: 100%;}
+.register_artwork div label{margin-left: 5.2vw; white-space: nowrap;}
+.register_artwork div input{margin-left: 2.6vw; border-radius: 5px; width: 15.6vw; height: 2.6vw; padding: 10px; font-size: 1vw;}
 .line{width: 100%; height: 1px; background-color: #c2c2c2;}
-.register_artwork button{width: 130px; height: 45px; background-color: black; border-radius: 25px; color: white; font-size: 18px;}
 
 /* 전시 등록 페이지 */
 .register_exhibition .artwokrs div input{width: 20px; height: 20px;}
-.register_exhibition .artwokrs div label{height: 20px; font-size: 18px;}
+.register_exhibition .artwokrs div label{height: 20px;}
 
 /* 통계 페이지 */
-.statistics_table{position: relative; width: 120%;}
-.statistics_table tr{position: relative; width: 100%; height: 50px;}
+.statistics_table{position: relative; width: 120%; border-spacing: 10px;}
+.statistics_table tr{position: relative; width: 100%;}
 .statistics_table img{border-radius: 50%; box-shadow: 0 0 10px rgb(151, 151, 151); position: absolute;}
+
+/* 반응형 웹 1520px */
+@media screen and (max-width: 1520px) {
+    .artist_registration_list table tr td:nth-child(2){width: 20px; height: 20px; left: 4%;}
+    .artist_registration_list table img{width: 20px; height: 20px;}
+    .login{height: 45vh;}
+    .signup{height: 45vh;}
+}
+
+/* 반응형 웹 1120px */
+@media screen and (max-width: 1120px) {
+    .title{margin-top: 40px;}
+    .search_btn{border-radius: 2vw;}
+    .search_forms{margin-top: 30px;}
+    .search_form{margin-top: 30px;}
+    .artist_registration_list table tr td:nth-child(2){width: 15px; height: 15px;}
+    .artist_registration_list table img{width: 15px; height: 15px;}
+    .login{height: 25vh;}
+    .signup{height: 35vh;}
+}

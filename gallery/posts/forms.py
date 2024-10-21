@@ -38,6 +38,12 @@ class SignUpForm(forms.ModelForm):
             user.save()
         return user
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise ValidationError('이미 존재하는 아이디입니다.')
+        return username
+
 class ArtistRegistrationForm(forms.ModelForm):
     class Meta:
         model = Artist

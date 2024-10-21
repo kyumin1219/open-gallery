@@ -23,15 +23,16 @@
                     </select>
                     <input type="date" name="birth_date" placeholder="생년월일" value="{{ request.GET.birth_date }}">
                     <input type="text" name="q" placeholder="작가님의 이름, 이메일 또는 연락처로 검색" value="{{ request.GET.q }}">
-                    <button type="submit">검색</button>
+                    <button type="submit" class="search_btn">검색</button>
                 </form>
-                <h1 class="tc mt4">작가 목록</h1>
+                <p class="cc title f24 mt4" style="font-weight: bold;">작가 목록</p>
+                {% if artists %}
                 <ul class="mt6 artist_list">
                     {% for artist in artists %}
                     <li>
-                        <img src="{% if artist.profile_image %}{{ artist.profile_image.url }}{% else %}{% static 'posts/images/default_profile.png' %}{% endif %}" alt="profile_img" width="400" height="250">
-                        <div>
-                            <p>{{ artist.name }}</p>
+                        <img src="{% if artist.profile_image %}{{ artist.profile_image.url }}{% else %}{% static 'posts/images/default_profile.png' %}{% endif %}" alt="profile_img">
+                        <div class="f14">
+                            <p class="f18" style="font-weight: bold;">{{ artist.name }}</p>
                             <p>{{ artist.get_gender_display }}</p>
                             <p>{{ artist.birth_date|date:"Y.m.d" }}</p>
                             <p>{{ artist.email }}</p>
@@ -40,6 +41,9 @@
                     </li>
                     {% endfor %}
                 </ul>
+                {% else %}
+                <p class="mt10">작품이 존재하지 않습니다.</p>
+                {% endif %}
             </div>
         </section>
     </main>

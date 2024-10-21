@@ -81,7 +81,6 @@ def logout_view(request):
     return redirect('home')
 
 # 회원가입
-logger = logging.getLogger(__name__)
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -90,6 +89,9 @@ def signup(request):
             login(request, user)
             messages.success(request, '회원가입이 성공적으로 완료되었습니다!')
             return redirect('home')
+        else:
+            for error in form.errors.values():
+                messages.error(request, error)
     else:
         form = SignUpForm()
     return render(request, 'posts/signup.html', {'form': form})

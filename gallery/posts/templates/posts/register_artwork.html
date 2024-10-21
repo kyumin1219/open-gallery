@@ -13,33 +13,33 @@
     <main>
         <section class="cc mt20">
             <div class="container cc">
-                <h1 class="tc">작품 등록</h1>
+                <p class="cc title f24" style="font-weight: bold;">작품 등록</p>
                 <div class="line mt2" style="background-color: black; height: 3px;"></div>
                 <form method="POST" id="artwork-form" class="register_artwork" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mt2 f hc">
-                        <label for="artwork_image">작품 사진:</label>
+                        <label class="f21" for="artwork_image">작품 사진:</label>
                         <input type="file" class="mt2" id="artwork_image" name="artwork_image" required>
                     </div>
                     <div class="line mt2"></div>
                     <div class="mt2 f hc">
-                        <label for="title">작품 제목:</label>
+                        <label class="f21" for="title">작품 제목:</label>
                         <input type="text" id="title" name="title" maxlength="64" required>
                     </div>
                     <div class="line mt2"></div>
                     <div class="mt2 f hc">
-                        <label for="price">가격:</label>
+                        <label class="f21" for="price">가격:</label>
                         <input type="text" id="price" name="price" required>
-                        <span style="margin-left: 5px;">원</span>
+                        <span class="f18" style="margin-left: 5px;">원</span>
                     </div>
                     <div class="line mt2"></div>
                     <div class="mt2 f hc">
-                        <label for="hoosu">호수 (1 ~ 500):</label>
+                        <label class="f21" for="hoosu">호수 (1 ~ 500):</label>
                         <input type="number" id="hoosu" name="hoosu" min="1" max="500" required>
-                        <span style="margin-left: 5px;">호수</span>
+                        <span class="f18" style="margin-left: 5px;">호수</span>
                     </div>
                     <div class="mt2 f hc cc mt8">
-                        <button type="submit">등록하기</button>
+                        <button type="submit" class="btn">등록하기</button>
                     </div>
                 </form>
             </div>

@@ -14,8 +14,8 @@
     <main>
         <section class="cc mt20">
             <div class="container signup mt4">
-                <h2 class="cc">Sign Up Page</h2>
-                <form action="{% url 'signup' %}" method="post" class="mt6">
+                <p class="cc f30" style="font-weight: bold;">Sign Up Page</p>
+                <form action="{% url 'signup' %}" method="post" class="mt6 f18">
                     {% csrf_token %}
                     <div class="mt2">
                         <p>이름 : </p>
@@ -34,7 +34,7 @@
                         {{ form.email }}
                     </div>
                     <div>
-                        <button type="submit">회원가입</button>
+                        <button type="submit" class="btn">회원가입</button>
                     </div>
                 </form>
             </div>
