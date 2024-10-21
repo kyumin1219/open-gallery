@@ -34,12 +34,24 @@ def home(request):
 
 def artwork_list(request):
     query = request.GET.get('q', '')
-    if query:
-        artworks = Artwork.objects.filter(title__icontains=query)
-    else:
-        artworks = Artwork.objects.all()
+    filter_type = request.GET.get('filter_type', '')
+    min_value = request.GET.get('min_value', '')
+    max_value = request.GET.get('max_value', '')
 
-    return render(request, 'posts/index.html', {'artworks': artworks}) 
+    artworks = Artwork.objects.all()
+
+    # 제목 검색
+    if query:
+        artworks = artworks.filter(title__icontains=query)
+    
+    # 가격 또는 호수 범위 필터링
+    if filter_type and min_value and max_value:
+        if filter_type == 'price':
+            artworks = artworks.filter(price__gte=min_value, price__lte=max_value)
+        elif filter_type == 'hoosu':
+            artworks = artworks.filter(hoosu__gte=min_value, hoosu__lte=max_value)
+
+    return render(request, 'posts/index.html', {'artworks': artworks})
 
 # 로그인
 def login_view(request):

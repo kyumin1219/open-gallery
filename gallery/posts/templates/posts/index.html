@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     {% load static %}
+    {% load humanize %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'posts/css/style.css' %}">
@@ -16,11 +17,26 @@
         <section class="mt20">
             <div class="container cc">
                 <!-- 검색 폼 -->
-                <form method="GET" action="{% url 'artwork_list' %}" class="search-form mt2">
-                    <input type="text" name="q" placeholder="제목, 가격, 호수로 검색" value="{{ request.GET.q }}">
+                <form method="GET" action="{% url 'artwork_list' %}" class="search-form mt2 cc">
+                    <!-- 제목 검색 -->
+                    <input type="text" name="q" placeholder="제목으로 검색" value="{{ request.GET.q }}">
+
+                    <!-- 가격 또는 호수 선택 -->
+                    <select name="filter_type">
+                        <option value="">가격 또는 호수</option>
+                        <option value="price" {% if request.GET.filter_type == 'price' %}selected{% endif %}>가격</option>
+                        <option value="hoosu" {% if request.GET.filter_type == 'hoosu' %}selected{% endif %}>호수</option>
+                    </select>
+
+                    <!-- 범위 입력 -->
+                    <input type="number" name="min_value" placeholder="최소" value="{{ request.GET.min_value }}">
+                    <span>~</span>
+                    <input type="number" name="max_value" placeholder="최대" value="{{ request.GET.max_value }}">
+
                     <button type="submit">검색</button>
                 </form>
                 <h1 class="tc mt4">작품 목록</h1>
+
                 <!-- 작품 목록 테이블 -->
                 {% if artworks %}
                 <ul class="artwork_list mt6">
@@ -29,15 +45,14 @@
                         <img src="{{ artwork.artwork_image.url }}" alt="artwork_img" width="300" height="250">
                         <div>
                             <p>{{ artwork.title }}</p>
-                            <p>{{ artwork.price|floatformat:0 }} 원</p>
+                            <p>{{ artwork.price|floatformat:0|intcomma }} 원</p>
                             <p>{{ artwork.hoosu }}호</p>
                             <p>{{ artwork.artist.name }}</p>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
-                {% endif %}
-                {% if not artworks %}
+                {% else %}
                 <p class="mt10">작품이 존재하지 않습니다.</p>
                 {% endif %}
             </div>
