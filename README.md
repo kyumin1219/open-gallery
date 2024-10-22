@@ -18,6 +18,8 @@
 git clone https://github.com/your-username/open-gallery.git
 cd open-gallery
 
+### 2. 가상환경 설정
+
 # 가상 환경 생성 (Python3 기준)
 python3 -m venv venv
 
