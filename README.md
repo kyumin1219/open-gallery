@@ -45,7 +45,7 @@ pip install -r requirements.txt
 python3 manage.py migrate
 ```
 
-### 4. 서버 실행
+### 5. 서버 실행
 
 ```bash
 python3 manage.py runserver
