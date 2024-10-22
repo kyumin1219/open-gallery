@@ -47,18 +47,26 @@ djangorestframework>=3.12,<4.0
 Pillow>=8.0
 ```
 
-### 5. 데이터베이스 마이그레이션
+## 5. 어드민 계정 생성
+```bash
+python3 manage.py createsuperuser
+# 아이디, 이메일, 비밀번호을 입력 후 localhost:<포트>/admin 접속합니다.
+# 생성한 어드민 계정의 아이디 비밀번호로 로그인하여 DB의 값들을 확인할 수 있습니다.
+```
+
+### 6. 데이터베이스 마이그레이션
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 6. 서버 실행
+### 7. 서버 실행
 
 ```bash
 python3 manage.py runserver
 ```
+
 
 ## 배포된 사이트
 이 프로젝트는 AWS EC2를 사용해 배포되었습니다. 다음 주소에서 사이트를 확인할 수 있습니다:
