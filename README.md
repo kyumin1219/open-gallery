@@ -39,14 +39,22 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. 데이터베이스 마이그레이션
+### 4. 패키지 추가 설치
+
+```bash
+# 하나씩 복사해서 requirements.txt 파일에 추가합니다.
+djangorestframework>=3.12,<4.0
+Pillow>=8.0
+```
+
+### 5. 데이터베이스 마이그레이션
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 5. 서버 실행
+### 6. 서버 실행
 
 ```bash
 python3 manage.py runserver
