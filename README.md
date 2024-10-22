@@ -19,7 +19,7 @@ git clone https://github.com/your-username/open-gallery.git
 cd open-gallery
 ```
 
-### `2. 가상환경 설정`
+### 2. 가상환경 설정
 
 ```bash
 # 가상 환경 생성 (Python3 기준)
@@ -30,4 +30,23 @@ source venv/bin/activate
 
 # 가상 환경 활성화 (Windows)
 venv\Scripts\activate
+```
+
+### 3. 필수 패키지 설치
+
+```bash
+# requirements.txt 파일에 명시된 프로젝트 패키지들을 설치합니다.
+pip install -r requirements.txt
+```
+
+### 4. 데이터베이스 마이그레이션
+
+```bash
+python3 manage.py migrate
+```
+
+### 4. 서버 실행
+
+```bash
+python3 manage.py runserver
 ```
