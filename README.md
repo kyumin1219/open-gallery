@@ -17,3 +17,12 @@
 ```bash
 git clone https://github.com/your-username/open-gallery.git
 cd open-gallery
+
+# 가상 환경 생성 (Python3 기준)
+python3 -m venv venv
+
+# 가상 환경 활성화 (Mac/Linux)
+source venv/bin/activate
+
+# 가상 환경 활성화 (Windows)
+venv\Scripts\activate
