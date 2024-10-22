@@ -67,7 +67,9 @@ python3 manage.py runserver
 
 ## 주요 URL
 고객 페이지: http://localhost:8000/
+
 관리자 페이지: http://localhost:8000/admin/
+
 작가 페이지: 작가로 로그인 시 이용 가능
 
 ## 기술 스택
