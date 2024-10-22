@@ -95,3 +95,9 @@ class ExhibitionForm(forms.ModelForm):
         artworks = cleaned_data.get('artworks')
         if not artworks:
             raise forms.ValidationError("작품 목록에서 한 개 이상의 작품을 선택해야 합니다.")
+            
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+        if len(title) > 64:
+            raise forms.ValidationError('제목은 64자를 넘을 수 없습니다.')
+        return title
