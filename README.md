@@ -42,7 +42,8 @@ pip install -r requirements.txt
 ### 4. 데이터베이스 마이그레이션
 
 ```bash
-python3 manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ### 5. 서버 실행
@@ -50,3 +51,33 @@ python3 manage.py migrate
 ```bash
 python3 manage.py runserver
 ```
+
+## 배포된 사이트
+이 프로젝트는 AWS EC2를 사용해 배포되었습니다. 다음 주소에서 사이트를 확인할 수 있습니다:
+
+사이트 주소: http://3.37.212.42:8000/home/
+
+## 주요 URL
+고객 페이지: http://localhost:8000/
+관리자 페이지: http://localhost:8000/admin/
+작가 페이지: 작가로 로그인 시 이용 가능
+
+## 기술 스택
+
+- **Django** - Python 기반 웹 프레임워크
+- **Django REST Framework** - API 개발
+- **SQLite** - 데이터베이스
+- **Pillow** - 이미지 처리 라이브러리
+- **AWS EC2** - 배포 인프라
+
+## 문제 해결 과정
+
+1. **이미지 업로드 문제**
+   - 문제: 이미지 파일 업로드 시 용량이 큰 파일로 인해 서버 응답 속도가 느려지는 문제 발생.
+   - 해결: `Pillow` 라이브러리를 사용하여 업로드 전 이미지 리사이징 및 최적화를 적용.
+
+## 향후 작업
+
+- **검색 및 필터 기능**: 사용자가 작가나 작품을 쉽게 검색할 수 있는 기능 추가 예정.
+- **RESTful API 개발**: Django REST Framework를 활용하여 API 엔드포인트 추가 예정.
+- **작품 이미지 업로드 최적화**: 대용량 이미지 파일 업로드 시 처리 성능 개선 작업 예정.
