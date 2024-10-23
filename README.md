@@ -88,6 +88,10 @@ python3 manage.py runserver
 - **Pillow** - 이미지 처리 라이브러리
 - **AWS EC2** - 배포 인프라
 
+## 느낀점
+
+- 
+
 ## 문제 해결 과정
 
 1. **이미지 업로드 문제**
