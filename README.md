@@ -74,9 +74,9 @@ python3 manage.py runserver
 사이트 주소: http://3.37.212.42:8000/home/
 
 ## 주요 URL
-고객 페이지: http://localhost:8000/
+고객 페이지: http://3.37.212.42:8000/home/
 
-관리자 페이지: http://localhost:8000/admin/
+관리자 페이지: http://3.37.212.42:8000/admin/
 
 작가 페이지: 작가로 로그인 시 이용 가능
 
