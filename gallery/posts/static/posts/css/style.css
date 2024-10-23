@@ -140,7 +140,7 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
     .artist_registration_list table tr td:nth-child(2){width: 20px; height: 20px; left: 4%;}
     .artist_registration_list table img{width: 20px; height: 20px;}
     .login{height: 45vh;}
-    .signup{height: 45vh;}
+    .signup{height: 50vh;}
 }
 
 /* 반응형 웹 1120px */
@@ -151,6 +151,6 @@ header nav ul>li button{padding: 0.5vw 1vw; background-color: white; font-size: 
     .search_form{margin-top: 30px;}
     .artist_registration_list table tr td:nth-child(2){width: 15px; height: 15px;}
     .artist_registration_list table img{width: 15px; height: 15px;}
-    .login{height: 25vh;}
-    .signup{height: 35vh;}
+    .login{height: 35vh;}
+    .signup{height: 40vh;}
 }
